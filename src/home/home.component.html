@@ -1,0 +1,41 @@
+<div class="content">
+    <div  class="icon">
+        <img src="..\assets\icon.png">
+        <div>Vault Manager</div>
+    </div>
+    <hr class="solid">
+    <div class="description">
+        <h2>Информация за системата</h2>
+        <p><strong>Vault Manager</strong> е система, която дава възможност на своите потребители да променят конфигурациите на своите <strong>Java Spring</strong> проложения динамично, без да се налага тяхното рестартиране.</p>
+        <p>Системата поддържа възможност за конфигурация на множество проекти.</p>
+        <p>Потребителите, които имат достъп до ситемата, разполагат с различни права, които определят функционалностите, до които имат достъп.</p>
+    </div>
+    <hr class="solid">
+    <div class="configuration">
+        <h2>Конфигурация</h2>
+        <p>За да използвате системата във вашето прилойение е неблохимо да добавите като dependency библиотеката - vault-manager-client и да приложите следната конфигурация:</p>
+        <pre>
+            <code>
+            &lt;dependency&gt;
+               &lt;groupId&gt;bg.fmi&lt;/groupId&gt;
+               &lt;artifactId&gt;vault-manager-client&lt;/artifactId&gt;
+               &lt;version&gt;версия на библиотеката&lt;/version&gt;
+            &lt;/dependency&gt;
+            </code>
+        </pre>
+        <div>
+                <ul>
+                    <li>vault.manager.projectnames = &lt;Лист с имена на проекти, чиито конфигурации ще се консумират&gt;</li>
+                    <li>vault.manager.api.url = &lt;Адрес на сървърната част&gt;</li>
+                    <li>vault.manager.username = &lt;Потребителско име на системата&gt;</li>
+                    <li>vault.manager.password = &lt;Парола на системата&gt;</li>
+                    <li>vault.manager.auth.cache.enabled = &lt;Флаг, определяш дали информацията, необходима за авторизация ще се кешира&gt;</li>
+                    <li>vault.manager.auth.cache.timeout = &lt;Време за кеширане на информацията, необходима за авторизация в минути&gt;</li>
+                    <li>vault.manager.auth.token.timeout = &lt;Време на валидност на ключа, необходим за авторизация в минути&gt;</li>
+                    <li>vault.manager.config.cache.enabled = &lt;Флаг, определящ дали конфигурациита ще се кешират&gt;</li>
+                    <li>vault.manager.config.cache.timeout = &lt;Време за кеширане на конфигурациите&gt;</li>
+                </ul>
+        </div>
+    </div>
+    <hr class="solid">
+</div>

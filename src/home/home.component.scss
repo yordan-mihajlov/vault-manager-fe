@@ -1,0 +1,39 @@
+.content {
+    color: darkgrey;
+    font-size: larger;
+
+    .description {
+        margin: 20px;
+        font-style: italic;
+        
+    }
+
+    .configuration {
+        margin-left: 20px;
+
+        pre {
+            border: 2px solid gray;
+            display: inline-flex;
+
+            code {
+                margin-right: 100px;
+            }
+        }
+    }
+    
+    .icon {
+        display: flex; /* To make the element a flex-level element */
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin: 0 auto; /* To center the element horizontally */
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-size: x-large;
+    
+        img {
+            width: 200px;
+        }
+    }
+}
+

@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>
+    Create a new project
+</h2>
+
+<div class="create-project-container">
+    <form [formGroup]="createPojectFormGroup" name="createPojectFormGroup">
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput [formControlName]="'name'">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Description</mat-label>
+            <textarea matInput [formControlName]="'description'"></textarea>
+        </mat-form-field>
+    </form>
+    <button class="create-button" mat-raised-button color="accent" (click)="onCreate()" [disabled]="!createPojectFormGroup.valid">
+        Create
+    </button>
+</div>

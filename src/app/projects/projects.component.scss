@@ -1,0 +1,37 @@
+:host {
+    .projectsContainer {
+        display: flex;
+        flex-wrap: wrap;
+    
+        mat-card {
+            width: 480px;
+            margin-left: 16px;
+            margin-right: 16px;
+            margin-bottom: 32px;
+            
+            mat-card-header {
+                display: block;
+                text-align: center;
+
+                mat-card-title {
+                    margin-bottom: 32px;
+                }
+            }
+            
+            mat-card-actions {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    
+        .actionButtons {
+            display: flex;
+            flex-direction: row;
+        }
+    }
+
+    button {
+        margin: 20px;;
+    }
+}

@@ -1,0 +1,68 @@
+<h2 mat-dialog-title>
+    {{ isLoginForm ? loginTitle : registerTitle }}
+</h2>
+
+<mat-dialog-content>
+    <div class="login-container" *ngIf="isLoginForm">
+        <form [formGroup]="loginFormGroup" name="loginFormGroup">
+            <mat-form-field>
+                <mat-label>Username</mat-label>
+                <input matInput [formControlName]="'username'">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input matInput
+                      [formControlName]="'password'"
+                      [type]="showPassword ? 'text' : 'password'">
+                <mat-icon matSuffix (click)="showPassword = !showPassword">{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+            </mat-form-field>
+        </form>
+
+        <button class="login-button" mat-raised-button color="accent" (click)="onLogin()" [disabled]="!loginFormGroup.valid">
+            Login
+        </button>
+        <p>
+            You don't have an account? <button class="switch-button" mat-stroked-button (click)="isLoginForm = false">Register</button>
+        </p>
+    </div>
+
+    <div class="register-container" *ngIf="!isLoginForm">
+        <form [formGroup]="registerFormGroup" name="registerFormGroup">
+            <mat-form-field>
+                <mat-label>Username - user for login</mat-label>
+                <input matInput [formControlName]="'username'">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>First name</mat-label>
+                <input matInput [formControlName]="'firstName'">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Last name</mat-label>
+                <input matInput [formControlName]="'lastName'">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput [formControlName]="'email'" ngModel email>
+            </mat-form-field>
+
+             <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input matInput
+                      [formControlName]="'password'"
+                      [type]="showPassword ? 'text' : 'password'">
+                <mat-icon matSuffix (click)="showPassword = !showPassword">{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+            </mat-form-field>
+        </form>
+
+        <button class="register-button" mat-raised-button color="accent" (click)="onRegister()" [disabled]="!registerFormGroup.valid">
+            Register
+        </button>
+        <p>
+            Already have an account? <button class="switch-button" mat-stroked-button (click)="isLoginForm = true">Login</button>
+        </p>
+    </div>
+</mat-dialog-content>

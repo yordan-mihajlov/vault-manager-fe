@@ -1,0 +1,60 @@
+<section>
+    <header>
+        <mat-toolbar class="mat-elevation-z6" color="primary">
+            <mat-toolbar-row>
+                <div>
+                    <button class="home-button" mat-icon-button (click)="drawer.toggle()">
+                        <mat-icon class="drawer-icon" *ngIf="!drawer.opened">menu</mat-icon>
+                        <mat-icon class="drawer-icon" *ngIf="drawer.opened">close</mat-icon>
+                    </button>
+                    Vault Manager
+                </div>
+                <div class="user-container">
+                    <div *ngIf="isLoggedIn" class="user-info">
+                        <span *ngIf="username | async">
+                            {{ username | async }}
+                        </span>
+                        <div class="roles-container" *ngIf="(roles | async) && (roles | async)!.length > 0">
+                            (<span *ngFor="let role of roles | async">{{ role }}</span>)
+                        </div>
+                    </div>
+                    <button class="auth-button" mat-raised-button color="secondary" (click)="onLoginLogoutClick()">
+                        {{ (isLoggedIn | async) ? 'Logout' : 'Login' }}
+                    </button>
+                </div>
+            </mat-toolbar-row>
+        </mat-toolbar>
+    </header>
+
+    <!-- Navigation drawer with content -->
+    <mat-drawer-container [autosize]="true">
+        <mat-drawer #drawer [mode]="'side'">
+            <app-drawer-item routerLink="/home" [icon]="'home'">
+                Home
+            </app-drawer-item>
+            <app-drawer-item *ngIf="(isLoggedIn | async)" routerLink="/projects" [icon]="'folder'">
+                Projects
+            </app-drawer-item>
+            <app-drawer-item *ngIf="(isLoggedIn | async)" routerLink="/secret" [icon]="'timer'">
+                Secrets <span class="unread-messeges-count" *ngIf="unreadSecretsCount !== 0">{{unreadSecretsCount}}</span>
+            </app-drawer-item>
+            <app-drawer-item *ngIf="(isLoggedIn | async)" routerLink="/my-details" [icon]="'account_circle'">
+                My details
+            </app-drawer-item>
+        </mat-drawer>
+
+        <mat-drawer-content class="mat-app-background">
+            <main>
+                <router-outlet></router-outlet>
+            </main>
+        </mat-drawer-content>
+    </mat-drawer-container>
+
+    <footer>
+        <mat-toolbar class="mat-elevation-z6" color="primary">
+            <mat-toolbar-row>
+                Footer text
+            </mat-toolbar-row>
+        </mat-toolbar>
+    </footer>
+</section>
