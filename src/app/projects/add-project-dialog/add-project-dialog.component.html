@@ -13,7 +13,7 @@
             <textarea matInput [formControlName]="'description'"></textarea>
         </mat-form-field>
     </form>
-    <button class="create-button" mat-raised-button color="accent" (click)="onCreate()" [disabled]="!createPojectFormGroup.valid">
+    <button *ngIf="isAdmin" class="create-button" mat-raised-button color="accent" (click)="onCreate()" [disabled]="!createPojectFormGroup.valid">
         Create
     </button>
 </div>

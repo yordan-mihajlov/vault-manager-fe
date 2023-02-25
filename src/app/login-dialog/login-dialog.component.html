@@ -31,27 +31,28 @@
         <form [formGroup]="registerFormGroup" name="registerFormGroup">
             <mat-form-field>
                 <mat-label>Username - user for login</mat-label>
-                <input matInput [formControlName]="'username'">
+                <input matInput maxlength="20" [formControlName]="'username'">
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>First name</mat-label>
-                <input matInput [formControlName]="'firstName'">
+                <input matInput maxlength="20" [formControlName]="'firstName'">
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Last name</mat-label>
-                <input matInput [formControlName]="'lastName'">
+                <input matInput maxlength="20" [formControlName]="'lastName'">
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Email</mat-label>
-                <input matInput [formControlName]="'email'" ngModel email>
+                <input matInput maxlength="50" [formControlName]="'email'" ngModel email>
             </mat-form-field>
 
              <mat-form-field>
                 <mat-label>Password</mat-label>
                 <input matInput
+                    maxlength="120"
                       [formControlName]="'password'"
                       [type]="showPassword ? 'text' : 'password'">
                 <mat-icon matSuffix (click)="showPassword = !showPassword">{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>

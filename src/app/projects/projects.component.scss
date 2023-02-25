@@ -5,9 +5,7 @@
     
         mat-card {
             width: 480px;
-            margin-left: 16px;
-            margin-right: 16px;
-            margin-bottom: 32px;
+            margin: 16px;
             
             mat-card-header {
                 display: block;
@@ -32,6 +30,7 @@
     }
 
     button {
-        margin: 20px;;
+        margin: 20px;
+        margin-bottom: 0px;
     }
 }

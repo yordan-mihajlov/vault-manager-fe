@@ -14,7 +14,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProjectItemComponent } from './project-item/project-item.component';
 import { AddProjectDialogComponent } from './add-project-dialog/add-project-dialog.component';
-
+import { SharedModule } from '../shared.module';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 const routes: Routes = [
   {
@@ -36,14 +37,16 @@ const routes: Routes = [
     MatDialogModule,
     MatDividerModule,
     CommonModule,
-    FormsModule
+    FormsModule,
+    SharedModule,
+    ClipboardModule
   ],
   exports: [RouterModule],
   declarations: [
     ProjectsComponent,
     ProjectDialogComponent,
     ProjectItemComponent,
-    AddProjectDialogComponent
+    AddProjectDialogComponent,
   ]
 })
 export class ProjectsModule { }

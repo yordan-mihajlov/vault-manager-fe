@@ -1,8 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SecretMessageResponse } from 'src/models/secret-message-response';
-import { ProjectsService } from 'src/services/projects.service';
 import { SecretsService } from 'src/services/secrets.service';
 
 @Component({
@@ -20,6 +19,7 @@ export class SecretDialogComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: {
     uuid: string
   },
+  private dialogRef: MatDialogRef<SecretDialogComponent>,
   private secretsService: SecretsService,
   private snackbar: MatSnackBar) {
     this.uuid = data.uuid;
@@ -31,6 +31,7 @@ export class SecretDialogComponent implements OnInit {
       this.secretHeader = secret.header;
       this.secretContent = secret.content;
     });
+    
   }
 
 }

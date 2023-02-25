@@ -30,7 +30,7 @@ export class LoginService {
   logout(): Observable<void> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    return this.httpClient.post<void>(VaultManagementApi.SIGNOUT, { headers, withCredentials: true });
+    return this.httpClient.post<void>(VaultManagementApi.SIGNOUT, {}, { headers, withCredentials: true });
   }
 
 }

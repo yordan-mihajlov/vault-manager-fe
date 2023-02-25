@@ -1,90 +1,80 @@
-import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { UnreadSecretMessageResponse } from 'src/models/unread-secret-message-response';
 import { SecretsService } from 'src/services/secrets.service';
+import { UsersService } from 'src/services/users.service';
 
 @Component({
-  selector: 'app-select-custom-trigger-example',
+  selector: 'select-names',
   templateUrl: 'select-names.component.html',
-  styleUrls: ['select-names.component.css']
+  styleUrls: ['select-names.component.scss']
 })
 
 export class SelectNamesComponent implements OnInit {
 
-  @ViewChild('search') searchTextBox: ElementRef;
+  @ViewChild('search') searchNamesTextBox: ElementRef;
 
-  selectFormControl = new FormControl();
-  searchTextboxControl = new FormControl();
-  selectedValues: string[] = ['A1',
-  'A2',];
-  data2: string[] = [
-    'A1',
-    'A2',
-    'A3',
-    'B1',
-    'B2',
-    'B3',
-    'C1',
-    'C2',
-    'C3'
-  ]
-  data: string[];
+  @Input() selectedNames: string[] = [];
+  @Output() newItemEvent = new EventEmitter<string[]>();
+
+  selectNamesFormControl = new FormControl();
+  searchNameTextboxControl = new FormControl();
+  names: string[] = [];
 
   filteredOptions: Observable<any[]>;
 
   constructor(
-    private secretsService: SecretsService) { }
+    private secretsService: SecretsService,
+    private usersService: UsersService) { }
 
   ngOnInit() {
-
-    of(this.data2).subscribe(
-      (elem: string[]) => this.data = elem
-    );
-
-
-    this.filteredOptions = this.searchTextboxControl.valueChanges
-      .pipe(
-        startWith<string>(''),
-        map(name => this._filter(name))
-      );
+    this.usersService.getUsernames().subscribe({
+      next: (usernames: string[]) => {
+        this.names = usernames;
+        this.filteredOptions = this.searchNameTextboxControl.valueChanges
+          .pipe(
+            startWith<string>(''),
+            map(name => this._filter(name))
+          );
+      }
+    });
   }
-
 
   private _filter(name: string): String[] {
     const filterValue = name.toLowerCase();
     this.setSelectedValues();
-    this.selectFormControl.patchValue(this.selectedValues);
-    let filteredList = this.data.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+    this.selectNamesFormControl.patchValue(this.selectedNames);
+    let filteredList = this.names.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
     return filteredList;
   }
 
   selectionChange(event: any) {
-    if (event.isUserInput && event.source.selected == false) {
-      let index = this.selectedValues.indexOf(event.source.value);
-      this.selectedValues.splice(index, 1)
+    if (event.isUserInput) {
+      let index = this.selectedNames.indexOf(event.source.value);
+      this.selectedNames.splice(index, 1)
+
+      this.newItemEvent.emit(this.selectedNames);
     }
   }
 
   openedChange(e: any) {
-    this.searchTextboxControl.patchValue('');
+    this.searchNameTextboxControl.patchValue('');
     if (e == true) {
-      this.searchTextBox.nativeElement.focus();
+      this.searchNamesTextBox.nativeElement.focus();
     }
   }
 
   clearSearch(event: any) {
     event.stopPropagation();
-    this.searchTextboxControl.patchValue('');
+    this.searchNameTextboxControl.patchValue('');
   }
 
-  setSelectedValues() {
-    console.log('selectFormControl', this.selectFormControl.value);
-    if (this.selectFormControl.value && this.selectFormControl.value.length > 0) {
-      this.selectFormControl.value.forEach((e: string) => {
-        if (this.selectedValues.indexOf(e) == -1) {
-          this.selectedValues.push(e);
+  private setSelectedValues() {
+    if (this.selectNamesFormControl.value && this.selectNamesFormControl.value.length > 0) {
+      this.selectNamesFormControl.value.forEach((e: string) => {
+        if (this.selectedNames.indexOf(e) == -1) {
+          this.selectedNames.push(e);
         }
       });
     }

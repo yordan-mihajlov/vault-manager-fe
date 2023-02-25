@@ -3,4 +3,5 @@ export interface UnreadSecretMessageResponse {
     uuid: string;
     isOneTime: boolean;
     expireDate: Date
+    new: boolean;
 }

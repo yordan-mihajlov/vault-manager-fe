@@ -2,14 +2,14 @@
     <h2 mat-dialog-title>
         {{projectName}}
     </h2>
-    <button mat-raised-button color="accent" (click)="onCancel()" *ngIf="!edit">
-        Add user
+    <button mat-raised-button color="accent" (click)="onChangeUsers()" *ngIf="view && isAdmin">
+        Change user
     </button>
 </div>
 
-<mat-divider *ngIf="!edit"></mat-divider>
+<mat-divider *ngIf="view"></mat-divider>
 <div class="container">
-    <ng-container class="projectConfig" *ngIf="!edit">
+    <ng-container class="projectConfig" *ngIf="view">
         <ng-container *ngFor="let config of configs | keyvalue" >
             <app-project-item 
             [key]="config.key"
@@ -18,12 +18,21 @@
         </ng-container>
     </ng-container>
     <ng-container *ngIf="edit">
-        <textarea [(ngModel)]="configsJson" *ngIf="edit">{{configsJson}}</textarea>
+        <textarea [(ngModel)]="configsJson" *ngIf="edit">{{configsJson}}"</textarea>
     </ng-container>
-    <mat-divider *ngIf="!edit"></mat-divider>
+    <ng-container *ngIf="changeUsers">
+        <select-names
+        [selectedNames] = usernames
+        (newItemEvent)="onUsernamesChange($event)"
+        ></select-names>
+    </ng-container>
+    <mat-divider *ngIf="view"></mat-divider>
     <div class="actionButtons">
-        <button mat-raised-button color="accent" (click)="onEdit()" *ngIf="!edit">
+        <button mat-raised-button color="accent" (click)="onEdit()" *ngIf="view">
             Edit
+        </button>
+        <button  mat-raised-button color="accent" [cdkCopyToClipboard]="configsJson" *ngIf="view">
+            Copy to clipboard
         </button>
         <button mat-raised-button color="accent" (click)="onSubmit()" *ngIf="edit">
             Submit
@@ -31,7 +40,8 @@
         <button mat-raised-button color="accent" (click)="onCancel()" *ngIf="edit">
             Cancel
         </button>
+        <button mat-raised-button color="accent" (click)="onSubmitUsers()" *ngIf="changeUsers && isAdmin">
+            Submit
+        </button>
     </div>
 </div>
-
-

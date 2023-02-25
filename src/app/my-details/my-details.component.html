@@ -1,1 +1,6 @@
-<p>my-details works!</p>
+<div class="user-details-container">
+    <h2>{{userInfo.firstname}} {{userInfo.lastname}}</h2>
+    <p><strong>Username:</strong> {{userInfo.username}}</p>
+    <p><strong>Email:</strong> {{userInfo.email}}</p>
+    <p><strong>Roles:</strong> {{userInfo.roles.join(', ')}}</p>
+  </div>

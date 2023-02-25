@@ -15,8 +15,11 @@
                             {{ username | async }}
                         </span>
                         <div class="roles-container" *ngIf="(roles | async) && (roles | async)!.length > 0">
-                            (<span *ngFor="let role of roles | async">{{ role }}</span>)
-                        </div>
+                            (<ng-container *ngFor="let role of roles | async; let isLast = last">
+                              {{ role.slice(5) }}
+                              <ng-container *ngIf="!isLast">, </ng-container>
+                            </ng-container>)
+                          </div>
                     </div>
                     <button class="auth-button" mat-raised-button color="secondary" (click)="onLoginLogoutClick()">
                         {{ (isLoggedIn | async) ? 'Logout' : 'Login' }}

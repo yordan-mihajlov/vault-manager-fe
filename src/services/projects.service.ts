@@ -5,6 +5,7 @@ import { VaultManagementApi } from 'src/api/vault-management-api';
 import { ConfigsRequest } from 'src/models/configs-request';
 import { ProjectRequest } from 'src/models/project-request';
 import { ProjectResponse } from 'src/models/project-response';
+import { UsersRequest } from 'src/models/users-request';
 
 @Injectable({
   providedIn: 'root'
@@ -44,5 +45,11 @@ export class ProjectsService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.httpClient.post<void>(VaultManagementApi.DELETE_PROJECT, projectName, { headers, withCredentials: true });
+  }
+
+  changeUsers(usersRequest: UsersRequest): Observable<void> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.httpClient.post<void>(VaultManagementApi.CHANGE_PROJECT_USERS, usersRequest, { headers, withCredentials: true });
   }
 }

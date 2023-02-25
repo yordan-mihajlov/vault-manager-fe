@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 import { interval, Observable, of, Subscription } from 'rxjs';
 import { startWith, switchMap, take } from 'rxjs/operators';
-import { UnreadSecretMessageResponse } from 'src/models/unread-secret-message-response';
+import { UnreadSecretMessagesCountResponse } from 'src/models/unread-secret-messages-count-response';
 
 import { AuthService } from 'src/services/auth.service';
 import { LoginService } from 'src/services/login.service';
@@ -32,7 +33,8 @@ export class AppComponent implements OnInit {
     private secretsService: SecretsService,
     private storageService: StorageService,
     private dialog: MatDialog,
-    private snackbar: MatSnackBar) { }
+    private snackbar: MatSnackBar,
+    private router:Router) { }
 
   ngOnInit(): void {
     this.loadStoredUser();
@@ -50,8 +52,10 @@ export class AppComponent implements OnInit {
     .subscribe((isLoggedIn) => {
       if (isLoggedIn) {
         this.loginService.logout().subscribe({
-          next: () => this.handleLogoutSuccess(),
-          error: () => this.handleLogoutFailure()
+          next: () => {this.handleLogoutSuccess()},
+          error: (data) => {
+            console.log(data)
+            this.handleLogoutFailure()}
         });
       } else {
         const dialogRef = this.dialog.open(LoginDialogComponent, {
@@ -66,30 +70,6 @@ export class AppComponent implements OnInit {
         });
       }
     });
-  }
-
-  private pollUnreadSecretsCount(): void {
-    this.unreadSecretsCountTimeInterval = interval(5000)
-    .pipe(
-      startWith(0),
-      switchMap(() => this.getUnreadSecretsCount()))
-      .subscribe(
-        unreadMessages => this.unreadSecretsCount = unreadMessages.length
-    );
-  }
-
-  private getUnreadSecretsCount(): Observable<UnreadSecretMessageResponse[]> {
-    if(this.storageService.getStoredIsLoggedIn()) {
-      return this.secretsService.getUnreadSecrets();
-    } else {
-      return of([]);
-    }
-  }
-
-  private setUnreadSecretsCount(): void {
-    this.getUnreadSecretsCount().subscribe(
-      unreadMessages => this.unreadSecretsCount = unreadMessages.length
-    );
   }
 
   private loadStoredUser(): void {
@@ -113,14 +93,37 @@ export class AppComponent implements OnInit {
     this.authService.setUsername(undefined);
     this.authService.setRoles([]);
 
+    this.router.navigate(['/'])
+
     this.snackbar.open('Successful logout!', undefined, { duration: 3000 });
   }
 
   private handleLogoutFailure(): void {
     this.snackbar.open('Failed to logout!', undefined, { duration: 3000 });
   }
-}
-function unreadMessages(unreadMessages: any, arg1: any, arg2: any): Subscription {
-  throw new Error('Function not implemented.');
+
+  private pollUnreadSecretsCount(): void {
+    this.unreadSecretsCountTimeInterval = interval(10*60*1000)
+    .pipe(
+      startWith(0),
+      switchMap(() => this.getUnreadSecretsCount()))
+      .subscribe(
+        unreadSecretsCountResponse => this.unreadSecretsCount = unreadSecretsCountResponse.count
+    );
+  }
+
+  private getUnreadSecretsCount(): Observable<UnreadSecretMessagesCountResponse> {
+    if(this.storageService.getStoredIsLoggedIn()) {
+      return this.secretsService.getUnreadSecretsCount();
+    } else {
+      return of({count : 0});
+    }
+  }
+
+  private setUnreadSecretsCount(): void {
+    this.getUnreadSecretsCount().subscribe(
+      unreadSecretsCountResponse => this.unreadSecretsCount = unreadSecretsCountResponse.count
+    );
+  }
 }
 

@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProjectsService } from 'src/services/projects.service';
+import { RoleService } from 'src/services/role.service';
 
 @Component({
   selector: 'app-add-project-dialog',
@@ -14,15 +15,18 @@ export class AddProjectDialogComponent implements OnInit {
 
   createPojectFormGroup: FormGroup;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {
+  isAdmin = false;
 
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {
   },
   private projectsService: ProjectsService,
+  private roleService: RoleService,
   private snackbar: MatSnackBar,
   private formBuilder: FormBuilder,
   private dialogRef: MatDialogRef<AddProjectDialogComponent>) { }
 
   ngOnInit(): void {
+    this.isAdmin = this.roleService.hasRole("ROLE_ADMIN");
     this.createPojectFormGroup = this.generatCreatePojectFormGroup();
   }
 

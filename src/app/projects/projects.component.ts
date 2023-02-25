@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProjectResponse } from 'src/models/project-response';
 import { ProjectsService } from 'src/services/projects.service';
+import { RoleService } from 'src/services/role.service';
 import { AddProjectDialogComponent } from './add-project-dialog/add-project-dialog.component';
 import { ProjectDialogComponent } from './project-dialog/project-dialog.component';
 
@@ -15,12 +16,16 @@ export class ProjectsComponent implements OnInit {
 
   projects: ProjectResponse[];
 
+  isAdmin = false;
+
   constructor(
     private projectsService: ProjectsService,
+    private roleService: RoleService,
     private dialog: MatDialog,
     private snackbar: MatSnackBar,) { }
 
   ngOnInit(): void {
+    this.isAdmin = this.roleService.hasRole("ROLE_ADMIN");
     this.getProjects();
   }
 
@@ -28,7 +33,7 @@ export class ProjectsComponent implements OnInit {
     const dialogRef = this.dialog.open(ProjectDialogComponent, {
       minWidth: 640,
       data: { 
-        projectName: projectName,
+        projectName: projectName
       }
     });
   }
