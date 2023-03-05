@@ -1,4 +1,4 @@
 export interface UsersRequest {
-    projectName: string;
-    userNames: string[];
+    configName: string;
+    usernames: string[];
 }

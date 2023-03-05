@@ -16,6 +16,7 @@ export class SelectNamesComponent implements OnInit {
   @ViewChild('search') searchNamesTextBox: ElementRef;
 
   @Input() selectedNames: string[] = [];
+  @Input() role: string;
   @Output() newItemEvent = new EventEmitter<string[]>();
 
   selectNamesFormControl = new FormControl();
@@ -29,7 +30,14 @@ export class SelectNamesComponent implements OnInit {
     private usersService: UsersService) { }
 
   ngOnInit() {
-    this.usersService.getUsernames().subscribe({
+
+    let $usernames: Observable<string[]> ;
+    if (!!this.role) {
+      $usernames = this.usersService.getUsernamesByRole(this.role)
+    } else {
+      $usernames = this.usersService.getUsernames()
+    }
+    $usernames.subscribe({
       next: (usernames: string[]) => {
         this.names = usernames;
         this.filteredOptions = this.searchNameTextboxControl.valueChanges

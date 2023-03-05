@@ -1,12 +1,12 @@
 :host {
-    .projectsContainer {
+    .configsContainer {
         display: flex;
         flex-wrap: wrap;
-    
+
         mat-card {
             width: 480px;
             margin: 16px;
-            
+
             mat-card-header {
                 display: block;
                 text-align: center;
@@ -15,14 +15,14 @@
                     margin-bottom: 32px;
                 }
             }
-            
+
             mat-card-actions {
                 display: flex;
                 align-items: center;
                 justify-content: center;
             }
         }
-    
+
         .actionButtons {
             display: flex;
             flex-direction: row;
@@ -30,7 +30,13 @@
     }
 
     button {
-        margin: 20px;
+        margin-left: 20px;
         margin-bottom: 0px;
+        margin-top: 20px;
     }
+
+    .selected {
+        background-color: #8a8a8a;
+    }
+
 }

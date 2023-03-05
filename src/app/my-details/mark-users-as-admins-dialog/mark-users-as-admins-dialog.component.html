@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>
+    Mark users as admins
+</h2>
+
+<div class="users-container">
+    <select-names
+    [selectedNames] = adminnames
+        (newItemEvent)="onUsernamesChange($event)"
+        ></select-names>
+    <button class="mark-button" mat-raised-button color="accent" (click)="onMarkUsersAsAdmins()">
+        Mark as admins
+    </button>
+</div>

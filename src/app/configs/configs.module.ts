@@ -5,30 +5,31 @@ import { RouterModule, Routes } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
-import { ProjectsComponent } from './projects.component';
-import { ProjectsRoutingModule } from './projects-routing.module';
-import { ProjectDialogComponent } from './project-dialog/project-dialog.component';
+import { ConfigsComponent } from './configs.component';
+import { ConfigsRoutingModule } from './configs-routing.module';
+import { ConfigDialogComponent } from './config-dialog/config-dialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ProjectItemComponent } from './project-item/project-item.component';
-import { AddProjectDialogComponent } from './add-project-dialog/add-project-dialog.component';
+import { ConfigItemComponent } from './config-item/config-item.component';
+import { AddConfigDialogComponent } from './add-config-dialog/add-config-dialog.component';
 import { SharedModule } from '../shared.module';
-import {ClipboardModule} from '@angular/cdk/clipboard';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 const routes: Routes = [
   {
     path: '',
-    component: ProjectsComponent,
-    data: { title: 'Projects component' }
+    component: ConfigsComponent,
+    data: { title: 'Configs component' }
   }
 ];
 
 @NgModule({
   imports: [
     RouterModule.forChild(routes),
-    ProjectsRoutingModule,
+    ConfigsRoutingModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatCardModule,
@@ -39,14 +40,15 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     SharedModule,
-    ClipboardModule
+    ClipboardModule,
+    MatButtonToggleModule
   ],
   exports: [RouterModule],
   declarations: [
-    ProjectsComponent,
-    ProjectDialogComponent,
-    ProjectItemComponent,
-    AddProjectDialogComponent,
+    ConfigsComponent,
+    ConfigDialogComponent,
+    ConfigItemComponent,
+    AddConfigDialogComponent,
   ]
 })
-export class ProjectsModule { }
+export class ConfigsModule { }

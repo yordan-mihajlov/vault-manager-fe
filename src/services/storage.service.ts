@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserInfoResponse } from 'src/models/user-info-response.model';
+import { RegisterResponse } from 'src/models/register-response.model';
 
 const USER_KEY = 'vault-user';
 
@@ -10,12 +10,12 @@ export class StorageService {
 
   constructor() { }
 
-  storeUser(user: UserInfoResponse): void {
+  storeUser(user: RegisterResponse): void {
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
-  getStoredUser(): UserInfoResponse | null {
+  getStoredUser(): RegisterResponse | null {
     const user = window.sessionStorage.getItem(USER_KEY);
 
     if (user) {

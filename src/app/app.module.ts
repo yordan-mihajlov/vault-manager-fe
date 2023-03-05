@@ -17,6 +17,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DrawerItemComponent } from './drawer-item/drawer-item.component';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
+import { SystemsComponent } from './systems/systems.component';
 
 @NgModule({
   declarations: [

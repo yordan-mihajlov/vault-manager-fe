@@ -1,4 +1,4 @@
-export interface UserInfoResponse {
+export interface RegisterResponse {
     id: string;
     username: string;
     firstname: string;

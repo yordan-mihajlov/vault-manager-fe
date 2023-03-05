@@ -3,15 +3,15 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ProjectsService } from 'src/services/projects.service';
+import { ConfigsService } from 'src/services/configs.service';
 import { RoleService } from 'src/services/role.service';
 
 @Component({
-  selector: 'app-add-project-dialog',
-  templateUrl: './add-project-dialog.component.html',
-  styleUrls: ['./add-project-dialog.component.scss']
+  selector: 'app-add-config-dialog',
+  templateUrl: './add-config-dialog.component.html',
+  styleUrls: ['./add-config-dialog.component.scss']
 })
-export class AddProjectDialogComponent implements OnInit {
+export class AddConfigDialogComponent implements OnInit {
 
   createPojectFormGroup: FormGroup;
 
@@ -19,11 +19,11 @@ export class AddProjectDialogComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: {
   },
-  private projectsService: ProjectsService,
+  private configsService: ConfigsService,
   private roleService: RoleService,
   private snackbar: MatSnackBar,
   private formBuilder: FormBuilder,
-  private dialogRef: MatDialogRef<AddProjectDialogComponent>) { }
+  private dialogRef: MatDialogRef<AddConfigDialogComponent>) { }
 
   ngOnInit(): void {
     this.isAdmin = this.roleService.hasRole("ROLE_ADMIN");
@@ -34,18 +34,18 @@ export class AddProjectDialogComponent implements OnInit {
     const name = this.createPojectFormGroup.controls['name'].value;
     const description = this.createPojectFormGroup.controls['description'].value;
 
-    const projectRequest = { name, description };
+    const configRequest = { name, description };
 
-    this.projectsService.createProject(projectRequest).subscribe({
+    this.configsService.createConfig(configRequest).subscribe({
       next: () => {
-        this.snackbar.open("Successfully created project", undefined, { duration: 3000 });
+        this.snackbar.open("Successfully created config", undefined, { duration: 3000 });
         this.dialogRef.close();
       },
       error: (value: HttpErrorResponse) => {
         if (value.status === 409) {
-          this.snackbar.open("Project with this name already exists", undefined, { duration: 3000 });
+          this.snackbar.open("Config with this name already exists", undefined, { duration: 3000 });
         } else {
-          this.snackbar.open("Error while creating project", undefined, { duration: 3000 });
+          this.snackbar.open("Error while creating config", undefined, { duration: 3000 });
           this.dialogRef.close();
         }
       }

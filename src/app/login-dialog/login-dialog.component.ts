@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { UserInfoResponse } from 'src/models/user-info-response.model';
+import { RegisterResponse } from 'src/models/register-response.model';
 import { AuthService } from 'src/services/auth.service';
 import { LoginService } from 'src/services/login.service';
 import { StorageService } from 'src/services/storage.service';
@@ -39,7 +39,7 @@ export class LoginDialogComponent implements OnInit {
     const password = this.loginFormGroup.controls['password'].value;
 
     this.loginService.login(username, password).subscribe({
-      next: (value: UserInfoResponse) => this.handleLoginSuccess(value),
+      next: (value: RegisterResponse) => this.handleLoginSuccess(value),
       error: (value: HttpErrorResponse) => this.handleLoginFailure(value)
     });
   }
@@ -54,12 +54,12 @@ export class LoginDialogComponent implements OnInit {
     const signupRequest = { username, password, email, firstName, lastName };
 
     this.loginService.register(signupRequest).subscribe({
-      next: (value: UserInfoResponse) => this.handleLoginSuccess(value),
+      next: (value: RegisterResponse) => this.handleLoginSuccess(value),
       error: (value: HttpErrorResponse) => this.handleRegisterFailure(value)
     });
   }
 
-  private handleLoginSuccess(value: UserInfoResponse): void {
+  private handleLoginSuccess(value: RegisterResponse): void {
     /* Store user in the browser. */
     this.storageService.storeUser(value);
 

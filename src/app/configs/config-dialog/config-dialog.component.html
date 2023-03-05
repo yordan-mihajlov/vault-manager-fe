@@ -1,0 +1,58 @@
+<div class="header">
+    <h2 mat-dialog-title>
+        {{configName}}
+    </h2>
+    <span>
+        <button mat-raised-button color="accent" (click)="onChangeUsers()" *ngIf="view && isAdmin">
+            Change user
+        </button>
+        <button mat-raised-button color="accent" (click)="onChangeSystems()" *ngIf="view && isAdmin">
+            Change systems
+        </button>
+    </span>
+</div>
+
+<mat-divider *ngIf="view"></mat-divider>
+<div class="container">
+    <ng-container class="configConfig" *ngIf="view">
+        <ng-container *ngFor="let config of configs | keyvalue">
+            <app-config-item [key]="config.key" [value]="config.value"></app-config-item>
+        </ng-container>
+    </ng-container>
+    <ng-container *ngIf="edit">
+        <textarea [(ngModel)]="configsText" *ngIf="edit">{{configsText}}"</textarea>
+    </ng-container>
+    <ng-container *ngIf="changeUsers">
+        <select-names [selectedNames]=usernames (newItemEvent)="onUsernamesChange($event)"></select-names>
+    </ng-container>
+    <ng-container *ngIf="changeSystems">
+        <select-names [selectedNames]=systemnames [role]="'ROLE_SYSTEM'"
+            (newItemEvent)="onSystemnamesChange($event)"></select-names>
+    </ng-container>
+    <mat-divider *ngIf="view"></mat-divider>
+    <div class="actionButtons">
+        <button mat-raised-button color="accent" (click)="onEdit()" *ngIf="view">
+            Edit
+        </button>
+        <button mat-raised-button color="accent" [cdkCopyToClipboard]="configsText" *ngIf="view">
+            Copy to clipboard
+        </button>
+        <button mat-raised-button color="accent" (click)="onSubmit()" *ngIf="edit">
+            Submit
+        </button>
+        <button mat-raised-button color="accent" (click)="onCancel()" *ngIf="edit">
+            Cancel
+        </button>
+        <button mat-raised-button color="accent" (click)="onSubmitUsers()" *ngIf="changeUsers && isAdmin">
+            Submit
+        </button>
+        <button mat-raised-button color="accent" (click)="onSubmitSystems()" *ngIf="changeSystems && isAdmin">
+            Submit
+        </button>
+
+        <mat-button-toggle-group *ngIf="edit" [(ngModel)]="format" (change)="onFormatChange($event)">
+            <mat-button-toggle [value]="'json'"> json </mat-button-toggle>
+            <mat-button-toggle [value]="'props'"> props </mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+</div>

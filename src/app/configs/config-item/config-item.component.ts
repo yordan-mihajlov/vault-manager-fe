@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-project-item',
-  templateUrl: './project-item.component.html',
-  styleUrls: ['./project-item.component.css']
+  selector: 'app-config-item',
+  templateUrl: './config-item.component.html',
+  styleUrls: ['./config-item.component.css']
 })
-export class ProjectItemComponent implements OnInit {
+export class ConfigItemComponent implements OnInit {
 
   @Input() key = '';
   @Input() value = '';

@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>
+   Register a new system
+</h2>
+
+<mat-dialog-content>
+
+    <div class="register-container">
+        <form [formGroup]="registerFormGroup" name="registerFormGroup">
+            <mat-form-field>
+                <mat-label>Username - user for login</mat-label>
+                <input matInput maxlength="20" [formControlName]="'username'">
+            </mat-form-field>
+
+             <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input matInput
+                    maxlength="120"
+                      [formControlName]="'password'"
+                      [type]="showPassword ? 'text' : 'password'">
+                <mat-icon matSuffix (click)="showPassword = !showPassword">{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+            </mat-form-field>
+        </form>
+
+        <button class="register-button" mat-raised-button color="accent" (click)="onRegister()" [disabled]="!registerFormGroup.valid">
+            Register
+        </button>
+    
+    </div>
+</mat-dialog-content>

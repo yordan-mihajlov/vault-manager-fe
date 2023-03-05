@@ -1,6 +1,7 @@
 export interface ConfigResponse {
     name: string;
     description: string;
-    username: string[];
+    usernames: string[];
+    systemnames: string[];
     configurations: Map<string, string>;
 }

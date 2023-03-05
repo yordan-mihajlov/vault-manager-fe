@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 
@@ -14,8 +13,12 @@ const routes: Routes = [
     loadChildren: () => import('../home/home.module').then(m => m.HomeModule)
   },
   {
-    path: 'projects',
-    loadChildren: () => import('../app/projects/projects.module').then(m => m.ProjectsModule)
+    path: 'configs',
+    loadChildren: () => import('../app/configs/configs.module').then(m => m.ConfigsModule)
+  },
+  {
+    path: 'systems',
+    loadChildren: () => import('../app/systems/systems.module').then(m => m.SystemsModule)
   },
   {
     path: 'secret',

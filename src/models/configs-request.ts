@@ -1,4 +1,4 @@
 export interface ConfigsRequest {
-    projectName: string;
+    configName: string;
     configs: Map<string, string>;
 }

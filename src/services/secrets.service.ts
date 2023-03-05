@@ -5,8 +5,8 @@ import { VaultManagementApi } from 'src/api/vault-management-api';
 import { SecretMessageRequest } from 'src/models/secret-message-request';
 import { SecretMessageResponse } from 'src/models/secret-message-response';
 import { UnreadSecretMessageResponse } from 'src/models/unread-secret-message-response';
-import { UnreadSecretMessagesCountResponse } from 'src/models/unread-secret-messages-count-response';
 
+import { UnreadSecretMessagesCountResponse } from 'src/models/unread-secret-messages-count-response';
 @Injectable({
   providedIn: 'root'
 })

@@ -35,8 +35,11 @@
             <app-drawer-item routerLink="/home" [icon]="'home'">
                 Home
             </app-drawer-item>
-            <app-drawer-item *ngIf="(isLoggedIn | async)" routerLink="/projects" [icon]="'folder'">
-                Projects
+            <app-drawer-item *ngIf="(isLoggedIn | async)" routerLink="/configs" [icon]="'folder'">
+                Configs
+            </app-drawer-item>
+            <app-drawer-item *ngIf="(isLoggedIn | async)" routerLink="/systems" [icon]="'settings'">
+                Systems
             </app-drawer-item>
             <app-drawer-item *ngIf="(isLoggedIn | async)" routerLink="/secret" [icon]="'timer'">
                 Secrets <span class="unread-messeges-count" *ngIf="unreadSecretsCount !== 0">{{unreadSecretsCount}}</span>
@@ -56,7 +59,7 @@
     <footer>
         <mat-toolbar class="mat-elevation-z6" color="primary">
             <mat-toolbar-row>
-                Footer text
+                <small>&copy; Copyright 2023, Vault Manager</small>
             </mat-toolbar-row>
         </mat-toolbar>
     </footer>
