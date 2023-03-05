@@ -1,4 +1,4 @@
-export interface ProjectResponse {
+export interface ConfigResponse {
     name: string;
     description: string;
     username: string[];

@@ -1,4 +1,4 @@
-export interface ProjectRequest {
+export interface ConfigRequest {
     name: string;
     description: string;
 }
