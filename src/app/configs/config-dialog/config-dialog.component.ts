@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfigsRequest } from 'src/models/configs-request';
@@ -24,9 +24,8 @@ export class ConfigDialogComponent implements OnInit {
   view: boolean;
   changeUsers: boolean;
   changeSystems: boolean;
-
-  isAdmin = false;
-  format: string = "json";
+  isAdmin: boolean;
+  format: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: {
     configName: string
@@ -53,8 +52,14 @@ export class ConfigDialogComponent implements OnInit {
     });
   }
 
-  onFormatChange(format: any): void {
+  onFormatChange(format: MatButtonToggleChange): void {
     if (format.value === "json") {
+      if (!this.isValidProperties(this.configsText)) {
+        format.source.buttonToggleGroup.value =  "props";
+        this.snackbar.open("Not a valid configuration", undefined, { duration: 3000 });
+        return;
+      }
+      this.propertiesToPropertiesMap(this.configsText);
       this.configs = this.propertiesToPropertiesMap(this.configsText);
       const configsObj = {} as Map<string, string>;
       this.configs.forEach((val: string, key: string) => {
@@ -64,6 +69,11 @@ export class ConfigDialogComponent implements OnInit {
       this.configs = configsObj
       this.configsText = this.convertToJson(this.configs);
     } else if (format.value === "props") {
+      if (!this.isValidJson(this.configsText)) {
+        format.source.buttonToggleGroup.value =  "json";
+        this.snackbar.open("Not a valid configuration", undefined, { duration: 3000 });
+        return;
+      }
       this.configs = this.jsonToPropertiesMapWrapper(this.configsText);
       const configsObj = {} as Map<string, string>;
       this.configs.forEach((val: string, key: string) => {
@@ -73,7 +83,6 @@ export class ConfigDialogComponent implements OnInit {
       this.configs = configsObj
       this.configsText = this.convertToProperties(this.configs);
     }
-    this.format = format.value;
   }
 
   onEdit(): void {
@@ -87,8 +96,16 @@ export class ConfigDialogComponent implements OnInit {
     let isValid = true;
     try {
       if (this.format === "json") {
+        if (!this.isValidJson(this.configsText)) {
+          this.snackbar.open("Not a valid configuration", undefined, { duration: 3000 });
+          return;
+        }
         this.configs = this.jsonToPropertiesMapWrapper(this.configsText);
       } else {
+        if (!this.isValidProperties(this.configsText)) {
+          this.snackbar.open("Not a valid configuration", undefined, { duration: 3000 });
+          return;
+        }
         this.configs = this.propertiesToPropertiesMap(this.configsText);
       }
     } catch (e) {
@@ -141,6 +158,31 @@ export class ConfigDialogComponent implements OnInit {
 
   onSystemnamesChange(systemnamesUpdate: string[]): void {
     this.systemnamesUpdate = systemnamesUpdate;
+  }
+
+  private isValidProperties(str: string): boolean {
+    const lines = str.split('\n');
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      if (line.startsWith('#') || line === '') {
+        continue;
+      }
+      const keyValue = line.split('=');
+      if (keyValue.length !== 2 || keyValue[0].trim() === '' || keyValue[1].trim() === '') {
+        return false;
+      }
+    }
+  
+    return true;
+  }
+
+  private isValidJson(str: string): boolean {
+    try {
+      JSON.parse(str);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   private saveConfigs(configName: string, configs: Map<string, string>): void {

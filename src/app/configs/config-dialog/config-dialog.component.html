@@ -50,7 +50,7 @@
             Submit
         </button>
 
-        <mat-button-toggle-group *ngIf="edit" [(ngModel)]="format" (change)="onFormatChange($event)">
+        <mat-button-toggle-group *ngIf="edit" [(ngModel)]="format" (change)="onFormatChange($event)" #toggleGroup>
             <mat-button-toggle [value]="'json'"> json </mat-button-toggle>
             <mat-button-toggle [value]="'props'"> props </mat-button-toggle>
         </mat-button-toggle-group>
