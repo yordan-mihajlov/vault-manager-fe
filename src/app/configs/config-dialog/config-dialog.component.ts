@@ -49,13 +49,15 @@ export class ConfigDialogComponent implements OnInit {
       this.usernamesUpdate = data.usernames;
       this.systemnames = data.systemnames;
       this.systemnamesUpdate = data.systemnames;
+      this.configsText = this.convertToJson(this.configs);
     });
   }
 
   onFormatChange(format: MatButtonToggleChange): void {
     if (format.value === "json") {
       if (!this.isValidProperties(this.configsText)) {
-        format.source.buttonToggleGroup.value =  "props";
+        this.format = "props";
+        format.source.buttonToggleGroup.value =this.format;
         this.snackbar.open("Not a valid configuration", undefined, { duration: 3000 });
         return;
       }
@@ -70,7 +72,8 @@ export class ConfigDialogComponent implements OnInit {
       this.configsText = this.convertToJson(this.configs);
     } else if (format.value === "props") {
       if (!this.isValidJson(this.configsText)) {
-        format.source.buttonToggleGroup.value =  "json";
+        this.format = "json";
+        format.source.buttonToggleGroup.value = this.format;
         this.snackbar.open("Not a valid configuration", undefined, { duration: 3000 });
         return;
       }
