@@ -4,10 +4,10 @@
     </h2>
     <span>
         <button mat-raised-button color="accent" (click)="onChangeUsers()" *ngIf="view && isAdmin">
-            Change user
+           Промяна на потребители
         </button>
         <button mat-raised-button color="accent" (click)="onChangeSystems()" *ngIf="view && isAdmin">
-            Change systems
+            Промяна на системи
         </button>
     </span>
 </div>
@@ -32,22 +32,22 @@
     <mat-divider *ngIf="view"></mat-divider>
     <div class="actionButtons">
         <button mat-raised-button color="accent" (click)="onEdit()" *ngIf="view">
-            Edit
+            Редакция
         </button>
         <button mat-raised-button color="accent" [cdkCopyToClipboard]="configsText" *ngIf="view">
-            Copy to clipboard
+            Копиране в клипборд
         </button>
         <button mat-raised-button color="accent" (click)="onSubmit()" *ngIf="edit">
-            Submit
+            Потвърждаване
         </button>
         <button mat-raised-button color="accent" (click)="onCancel()" *ngIf="edit">
-            Cancel
+            Отказ
         </button>
         <button mat-raised-button color="accent" (click)="onSubmitUsers()" *ngIf="changeUsers && isAdmin">
-            Submit
+            Потвърждаване
         </button>
         <button mat-raised-button color="accent" (click)="onSubmitSystems()" *ngIf="changeSystems && isAdmin">
-            Submit
+            Потвърждаване
         </button>
 
         <mat-button-toggle-group *ngIf="edit" [(ngModel)]="format" (change)="onFormatChange($event)" #toggleGroup>

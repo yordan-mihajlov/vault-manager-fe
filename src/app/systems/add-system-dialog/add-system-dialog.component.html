@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>
-   Register a new system
+   Регистрация на нова система
 </h2>
 
 <mat-dialog-content>
@@ -7,12 +7,12 @@
     <div class="register-container">
         <form [formGroup]="registerFormGroup" name="registerFormGroup">
             <mat-form-field>
-                <mat-label>Username - user for login</mat-label>
+                <mat-label>Име на система</mat-label>
                 <input matInput maxlength="20" [formControlName]="'username'">
             </mat-form-field>
 
              <mat-form-field>
-                <mat-label>Password</mat-label>
+                <mat-label>Парола</mat-label>
                 <input matInput
                     maxlength="120"
                       [formControlName]="'password'"
@@ -22,7 +22,7 @@
         </form>
 
         <button class="register-button" mat-raised-button color="accent" (click)="onRegister()" [disabled]="!registerFormGroup.valid">
-            Register
+            Регистрация
         </button>
     
     </div>

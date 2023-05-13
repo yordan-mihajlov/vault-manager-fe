@@ -1,19 +1,19 @@
 <h2 mat-dialog-title>
-    Create a new config
+    Създаване на нова конфигурация
 </h2>
 
 <div class="create-config-container">
     <form [formGroup]="createPojectFormGroup" name="createPojectFormGroup">
         <mat-form-field>
-            <mat-label>Name</mat-label>
+            <mat-label>Име</mat-label>
             <input matInput [formControlName]="'name'">
         </mat-form-field>
         <mat-form-field>
-            <mat-label>Description</mat-label>
+            <mat-label>Описание</mat-label>
             <textarea matInput [formControlName]="'description'"></textarea>
         </mat-form-field>
     </form>
     <button *ngIf="isAdmin" class="create-button" mat-raised-button color="accent" (click)="onCreate()" [disabled]="!createPojectFormGroup.valid">
-        Create
+        Създаване
     </button>
 </div>

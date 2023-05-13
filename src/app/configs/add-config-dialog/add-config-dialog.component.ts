@@ -38,14 +38,14 @@ export class AddConfigDialogComponent implements OnInit {
 
     this.configsService.createConfig(configRequest).subscribe({
       next: () => {
-        this.snackbar.open("Successfully created config", undefined, { duration: 3000 });
+        this.snackbar.open("Успешно създадена конфигурация!", undefined, { duration: 3000 });
         this.dialogRef.close();
       },
       error: (value: HttpErrorResponse) => {
         if (value.status === 409) {
-          this.snackbar.open("Config with this name already exists", undefined, { duration: 3000 });
+          this.snackbar.open("Конфигурация с такова име вече съществува!", undefined, { duration: 3000 });
         } else {
-          this.snackbar.open("Error while creating config", undefined, { duration: 3000 });
+          this.snackbar.open("Възникна грешка при създаването на конфигурация!", undefined, { duration: 3000 });
           this.dialogRef.close();
         }
       }

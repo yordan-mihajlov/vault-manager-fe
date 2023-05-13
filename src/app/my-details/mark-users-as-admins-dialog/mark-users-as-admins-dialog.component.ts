@@ -25,7 +25,7 @@ export class MarkUsersAsAdminsDialogComponent implements OnInit {
         this.adminnames = adminnames;
       },
       error: (value: HttpErrorResponse) => {
-        this.snackbar.open("Error while fetching admins", undefined, { duration: 3000 });
+        this.snackbar.open("Възникна грешка при извличането на администраторите!", undefined, { duration: 3000 });
           this.dialogRef.close();
       }
     });
@@ -39,12 +39,12 @@ export class MarkUsersAsAdminsDialogComponent implements OnInit {
     let markUsersAsAdmins = {usernames: this.usernames};
     this.usersService.markUsersAsAdmins(markUsersAsAdmins).subscribe({
       next: () => {
-        this.snackbar.open("Successfully marked as admins", undefined, { duration: 3000 });
+        this.snackbar.open("Потребителят е маркиран като администратор успешно!", undefined, { duration: 3000 });
         this.dialogRef.close();
       },
       error: (value: HttpErrorResponse) => {
         console.log(value);
-        this.snackbar.open("Error while markings as admins", undefined, { duration: 3000 });
+        this.snackbar.open("Възникна грешка при маркирането на потребителя като администратор!", undefined, { duration: 3000 });
           this.dialogRef.close();
       }
     });

@@ -22,7 +22,7 @@
                           </div>
                     </div>
                     <button class="auth-button" mat-raised-button color="secondary" (click)="onLoginLogoutClick()">
-                        {{ (isLoggedIn | async) ? 'Logout' : 'Login' }}
+                        {{ (isLoggedIn | async) ? 'Изход' : 'Вход' }}
                     </button>
                 </div>
             </mat-toolbar-row>
@@ -33,19 +33,19 @@
     <mat-drawer-container [autosize]="true">
         <mat-drawer #drawer [mode]="'side'">
             <app-drawer-item routerLink="/home" [icon]="'home'">
-                Home
+                Начало
             </app-drawer-item>
             <app-drawer-item *ngIf="(isLoggedIn | async)" routerLink="/configs" [icon]="'folder'">
-                Configs
+                Конфигурации
             </app-drawer-item>
             <app-drawer-item *ngIf="(isLoggedIn | async)" routerLink="/systems" [icon]="'settings'">
-                Systems
+                Системи
             </app-drawer-item>
             <app-drawer-item *ngIf="(isLoggedIn | async)" routerLink="/secret" [icon]="'timer'">
-                Secrets <span class="unread-messeges-count" *ngIf="unreadSecretsCount !== 0">{{unreadSecretsCount}}</span>
+                Тайни <span class="unread-messeges-count" *ngIf="unreadSecretsCount !== 0">{{unreadSecretsCount}}</span>
             </app-drawer-item>
             <app-drawer-item *ngIf="(isLoggedIn | async)" routerLink="/my-details" [icon]="'account_circle'">
-                My details
+                Моите детайли
             </app-drawer-item>
         </mat-drawer>
 

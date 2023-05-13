@@ -95,11 +95,11 @@ export class AppComponent implements OnInit {
 
     this.router.navigate(['/'])
 
-    this.snackbar.open('Successful logout!', undefined, { duration: 3000 });
+    this.snackbar.open('Успехен изход от системата!', undefined, { duration: 3000 });
   }
 
   private handleLogoutFailure(): void {
-    this.snackbar.open('Failed to logout!', undefined, { duration: 3000 });
+    this.snackbar.open('Възникна грешка при изход от системата!', undefined, { duration: 3000 });
   }
 
   private pollUnreadSecretsCount(): void {

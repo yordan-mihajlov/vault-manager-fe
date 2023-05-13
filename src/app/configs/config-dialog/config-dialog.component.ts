@@ -58,7 +58,7 @@ export class ConfigDialogComponent implements OnInit {
       if (!this.isValidProperties(this.configsText)) {
         this.format = "props";
         format.source.buttonToggleGroup.value =this.format;
-        this.snackbar.open("Not a valid configuration", undefined, { duration: 3000 });
+        this.snackbar.open("Невалидна конфигурация!", undefined, { duration: 3000 });
         return;
       }
       this.propertiesToPropertiesMap(this.configsText);
@@ -74,7 +74,7 @@ export class ConfigDialogComponent implements OnInit {
       if (!this.isValidJson(this.configsText)) {
         this.format = "json";
         format.source.buttonToggleGroup.value = this.format;
-        this.snackbar.open("Not a valid configuration", undefined, { duration: 3000 });
+        this.snackbar.open("Невалидна конфигурация!", undefined, { duration: 3000 });
         return;
       }
       this.configs = this.jsonToPropertiesMapWrapper(this.configsText);
@@ -100,20 +100,20 @@ export class ConfigDialogComponent implements OnInit {
     try {
       if (this.format === "json") {
         if (!this.isValidJson(this.configsText)) {
-          this.snackbar.open("Not a valid configuration", undefined, { duration: 3000 });
+          this.snackbar.open("Невалидна конфигурация!", undefined, { duration: 3000 });
           return;
         }
         this.configs = this.jsonToPropertiesMapWrapper(this.configsText);
       } else {
         if (!this.isValidProperties(this.configsText)) {
-          this.snackbar.open("Not a valid configuration", undefined, { duration: 3000 });
+          this.snackbar.open("Невалидна конфигурация!", undefined, { duration: 3000 });
           return;
         }
         this.configs = this.propertiesToPropertiesMap(this.configsText);
       }
     } catch (e) {
       isValid = false;
-      this.snackbar.open("Not a valid configuration", undefined, { duration: 3000 });
+      this.snackbar.open("Невалидна конфигурация!", undefined, { duration: 3000 });
     }
     if (isValid) {
       this.view = true;
@@ -195,8 +195,8 @@ export class ConfigDialogComponent implements OnInit {
 
 
     this.configsService.updateConfigConfigs(configsRequest).subscribe({
-      next: () => this.snackbar.open("Successfully saved configuration", undefined, { duration: 3000 }),
-      error: () => this.snackbar.open("Error while saving configurations", undefined, { duration: 3000 })
+      next: () => this.snackbar.open("Успешна промяна на конфигурацията!", undefined, { duration: 3000 }),
+      error: () => this.snackbar.open("Възникна грешка при промяната на конфигурацията!", undefined, { duration: 3000 })
     }
     )
   }
@@ -206,8 +206,8 @@ export class ConfigDialogComponent implements OnInit {
       configName, usernames
     };
     this.configsService.changeUsers(usersRequest).subscribe({
-      next: () => this.snackbar.open("Successfully saved users", undefined, { duration: 3000 }),
-      error: () => this.snackbar.open("Error while saving users", undefined, { duration: 3000 })
+      next: () => this.snackbar.open("Успешна промяна на потребителите!", undefined, { duration: 3000 }),
+      error: () => this.snackbar.open("Възникна грешка при промяната на потребителите!", undefined, { duration: 3000 })
     }
     )
   }
@@ -217,8 +217,8 @@ export class ConfigDialogComponent implements OnInit {
       configName, usernames
     };
     this.configsService.changeSystems(usersRequest).subscribe({
-      next: () => this.snackbar.open("Successfully saved systems", undefined, { duration: 3000 }),
-      error: () => this.snackbar.open("Error while saving systems", undefined, { duration: 3000 })
+      next: () => this.snackbar.open("Успешна промяна на системите!", undefined, { duration: 3000 }),
+      error: () => this.snackbar.open("Възникна грешка при промяната на системите!", undefined, { duration: 3000 })
     }
     )
   }

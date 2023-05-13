@@ -54,10 +54,10 @@ export class ConfigsComponent implements OnInit {
   onDeleteClick(configtName: String) {
     this.configsService.deleteConfig(configtName).subscribe({
       next: () => {
-        this.snackbar.open("Successfully deleted config", undefined, { duration: 3000 });
+        this.snackbar.open("Конфигурацията е изтрита успешно!", undefined, { duration: 3000 });
         this.getConfigs();
       },
-      error: () => this.snackbar.open("Error while deliting config", undefined, { duration: 3000 })
+      error: () => this.snackbar.open("Възникна грешка при изтриването на конфигурацията!", undefined, { duration: 3000 })
     })
   }
 
@@ -97,13 +97,13 @@ export class ConfigsComponent implements OnInit {
 
     this.configsService.import(formData).subscribe({
       next: () => {
-        this.snackbar.open("Successfully imported configs", undefined, { duration: 3000 });
+        this.snackbar.open("Успешно импортирани конфигурации!", undefined, { duration: 3000 });
         this.getConfigs();
       },
       error: (value: HttpErrorResponse) => {
         if (value.status === 409) {
-          this.snackbar.open("Config with this name already exists", undefined, { duration: 3000 });
-        } else { this.snackbar.open("Error while importing configs", undefined, { duration: 3000 }) }
+          this.snackbar.open("Конфигурация с такова име вече съществува!", undefined, { duration: 3000 });
+        } else { this.snackbar.open("Възникна грешка при импортирането на конфигурации!", undefined, { duration: 3000 }) }
       }
     });
   }
@@ -111,7 +111,7 @@ export class ConfigsComponent implements OnInit {
   private getConfigs(): void {
     this.configsService.getConfigAll().subscribe({
       next: (configs) => this.configs = configs,
-      error: () => this.snackbar.open("Error while fetching configs", undefined, { duration: 3000 })
+      error: () => this.snackbar.open("Възникна грешка при извличането на конфигурациите!", undefined, { duration: 3000 })
     });
   }
 }

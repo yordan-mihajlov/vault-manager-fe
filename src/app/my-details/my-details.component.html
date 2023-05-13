@@ -1,8 +1,8 @@
-<button mat-button *ngIf="isModerator" color="accent" mat-raised-button (click)="onMarkAsAdminsClick()">Mark users as admins</button>
+<button mat-button *ngIf="isModerator" color="accent" mat-raised-button (click)="onMarkAsAdminsClick()">Маркиране като админ</button>
 
 <div class="user-details-container">
     <h2>{{userInfo.firstname}} {{userInfo.lastname}}</h2>
-    <p><strong>Username:</strong> {{userInfo.username}}</p>
-    <p><strong>Email:</strong> {{userInfo.email}}</p>
-    <p><strong>Roles:</strong> {{userInfo.roles.join(', ')}}</p>
+    <p><strong>Потребителско име:</strong> {{userInfo.username}}</p>
+    <p><strong>Емейл:</strong> {{userInfo.email}}</p>
+    <p><strong>Роли:</strong> {{userInfo.roles.join(', ')}}</p>
 </div>

@@ -45,7 +45,7 @@ export class SecretComponent implements OnInit {
   private getSecrets(): void {
     this.secretsService.getUnreadSecrets().subscribe({
       next: (unreadSecrets) => this.unreadSecrets = unreadSecrets,
-      error: () => this.snackbar.open("Error while unread secrets", undefined, { duration: 3000 })
+      error: () => this.snackbar.open("Възникна грешка при извлизането на непрочетените тайни!", undefined, { duration: 3000 })
     });
   }
 }

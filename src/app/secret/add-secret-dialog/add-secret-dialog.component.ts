@@ -40,12 +40,12 @@ export class AddSecretDialogComponent implements OnInit {
 
     this.secretsService.createSecret(secretRequest).subscribe({
       next: () => {
-        this.snackbar.open("Successfully created secret", undefined, { duration: 3000 });
+        this.snackbar.open("Успешно създаване на тайна!", undefined, { duration: 3000 });
         this.dialogRef.close();
       },
       error: (value: HttpErrorResponse) => {
         console.log(value);
-        this.snackbar.open("Error while creating secret", undefined, { duration: 3000 });
+        this.snackbar.open("Възникна грешка при създаването на тайна!", undefined, { duration: 3000 });
           this.dialogRef.close();
       }
     });

@@ -6,12 +6,12 @@
     <div class="login-container" *ngIf="isLoginForm">
         <form [formGroup]="loginFormGroup" name="loginFormGroup">
             <mat-form-field>
-                <mat-label>Username</mat-label>
+                <mat-label>Потребителско име</mat-label>
                 <input matInput [formControlName]="'username'">
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>Password</mat-label>
+                <mat-label>Парола</mat-label>
                 <input matInput
                       [formControlName]="'password'"
                       [type]="showPassword ? 'text' : 'password'">
@@ -20,37 +20,37 @@
         </form>
 
         <button class="login-button" mat-raised-button color="accent" (click)="onLogin()" [disabled]="!loginFormGroup.valid">
-            Login
+            Вход
         </button>
         <p>
-            You don't have an account? <button class="switch-button" mat-stroked-button (click)="isLoginForm = false">Register</button>
+            Все още нямате акаунт? <button class="switch-button" mat-stroked-button (click)="isLoginForm = false">Регистрация</button>
         </p>
     </div>
 
     <div class="register-container" *ngIf="!isLoginForm">
         <form [formGroup]="registerFormGroup" name="registerFormGroup">
             <mat-form-field>
-                <mat-label>Username - user for login</mat-label>
+                <mat-label>Потребителско име</mat-label>
                 <input matInput maxlength="20" [formControlName]="'username'">
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>First name</mat-label>
+                <mat-label>Собствено име</mat-label>
                 <input matInput maxlength="20" [formControlName]="'firstName'">
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>Last name</mat-label>
+                <mat-label>Фамилия</mat-label>
                 <input matInput maxlength="20" [formControlName]="'lastName'">
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>Email</mat-label>
+                <mat-label>Емейл</mat-label>
                 <input matInput maxlength="50" [formControlName]="'email'" ngModel email>
             </mat-form-field>
 
              <mat-form-field>
-                <mat-label>Password</mat-label>
+                <mat-label>Парола</mat-label>
                 <input matInput
                     maxlength="120"
                       [formControlName]="'password'"
@@ -60,10 +60,10 @@
         </form>
 
         <button class="register-button" mat-raised-button color="accent" (click)="onRegister()" [disabled]="!registerFormGroup.valid">
-            Register
+            Регистриране
         </button>
         <p>
-            Already have an account? <button class="switch-button" mat-stroked-button (click)="isLoginForm = true">Login</button>
+           Имате създаден акаунт? <button class="switch-button" mat-stroked-button (click)="isLoginForm = true">Вход</button>
         </p>
     </div>
 </mat-dialog-content>

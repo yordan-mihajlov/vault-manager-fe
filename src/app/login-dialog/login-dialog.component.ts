@@ -15,8 +15,8 @@ import { StorageService } from 'src/services/storage.service';
 export class LoginDialogComponent implements OnInit {
 
   isLoginForm: boolean = true;
-  loginTitle = 'Log in to your profile';
-  registerTitle = 'Create your profile';
+  loginTitle = 'Влизане в профил';
+  registerTitle = 'Създавеане на профил';
   showPassword = false;
 
   loginFormGroup: FormGroup;
@@ -69,18 +69,18 @@ export class LoginDialogComponent implements OnInit {
     this.authService.setRoles(value.roles);
 
     /* Close dialog on success. */
-    this.dialogRef.close({ message: 'Successful login!' });
+    this.dialogRef.close({ message: 'Упешен вход!' });
   }
 
   private handleLoginFailure(value: HttpErrorResponse): void {
-    this.dialogRef.close({ message: 'Failed to login!' });
+    this.dialogRef.close({ message: 'Възникна грешка при опит за вход!' });
   }
 
   private handleRegisterFailure(value: HttpErrorResponse): void {
     if (value.status === 400) {
-      this.dialogRef.close({ message: 'User already exists!'});
+      this.dialogRef.close({ message: 'Потребителят съществува!'});
     } else {
-      this.dialogRef.close({ message: 'Failed to register!'});
+      this.dialogRef.close({ message: 'Възникна грешка при регистрацията на потребителя!'});
     }
   }
 

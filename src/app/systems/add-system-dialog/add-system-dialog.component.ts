@@ -36,11 +36,11 @@ export class AddSystemDialogComponent implements OnInit {
 
     this.loginService.registerSystem(signupRequest).subscribe({
       next: (value: RegisterResponse) => {
-        this.snackbar.open("Successfully registred system", undefined, { duration: 3000 });
+        this.snackbar.open("Системата е регистрирана успешно!", undefined, { duration: 3000 });
         this.dialogRef.close();
       },
       error: (value: HttpErrorResponse) => {
-        this.snackbar.open("Error while regestering system", undefined, { duration: 3000 });
+        this.snackbar.open("Възникна грешка при регистрацията на системата!", undefined, { duration: 3000 });
         this.dialogRef.close();
       }
     });
